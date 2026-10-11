@@ -5,29 +5,70 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
   min-height: 100vh;
+  min-height: 100dvh;
+
   background: #e4ded2;
   color: #514940;
+
   font-family: 'Gloria Hallelujah', cursive;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  overflow: hidden;
 }
+
+/* --------------------------------
+   MAIN APP
+-------------------------------- */
 
 #app {
   position: relative;
+
   width: 880px;
   height: 480px;
+
+  flex-shrink: 0;
+
+  /*
+    Scale the complete artwork to fit
+    the browser window.
+
+    The original artwork stays 880x480.
+  */
+
+  zoom: min(
+    calc((100vw - 60px) / 880px),
+    calc((100dvh - 60px) / 480px),
+    1.65
+  );
 }
+
+/* --------------------------------
+   CANVAS
+-------------------------------- */
 
 #app canvas {
   display: block;
 }
 
+/* --------------------------------
+   STATUS
+-------------------------------- */
+
 #status {
   position: absolute;
+
   left: 660px;
   top: 165px;
 
@@ -37,11 +78,17 @@ body {
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 16px;
   line-height: 1.5;
+
   color: #514940;
 }
 
+/* --------------------------------
+   BUTTONS
+-------------------------------- */
+
 #controls {
   position: absolute;
+
   left: 660px;
   top: 235px;
 
@@ -49,6 +96,7 @@ body {
 
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   gap: 10px;
 }
 
@@ -67,4 +115,17 @@ body {
 
 #controls button:hover {
   background: #ded5c4;
+}
+
+/* --------------------------------
+   SMALL SCREENS
+-------------------------------- */
+
+@media (max-width: 600px) {
+  #app {
+    zoom: min(
+      calc((100vw - 24px) / 880px),
+      calc((100dvh - 24px) / 480px)
+    );
+  }
 }
